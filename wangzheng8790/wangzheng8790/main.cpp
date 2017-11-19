@@ -38,7 +38,7 @@ int main() {
                 double Velocity2 = Power - 0.5 * Mass2;
                 //趟数
                 int toCarryCount = SumGoods / (ArmPower * Arm) + 1;
-                //去时间zz
+                //去时间
                 double time1 = toCarryCount * (Distance / Velocity1);
                 //回时间
                 double time2 = toCarryCount * (Distance / Velocity2);
