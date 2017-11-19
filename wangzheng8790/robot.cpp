@@ -27,21 +27,37 @@ int main() {
         for (int Engine = 1; Engine < 10; Engine++) {
             for (int Battery = 1; Battery < 10; Battery++) {
                 //总动力值
-                int Power = Engine * EnginePower;
+                double Power = Engine * EnginePower;
                 //空载总质量
-                int Mass1 = BaseMass + ArmMass * Arm + EngineMass * Engine + BatteryMass * Battery;
+                double Mass1 = BaseMass + ArmMass * Arm + EngineMass * Engine + BatteryMass * Battery;
                 //满载总质量
-                int Mass2 = Mass1 + Arm * ArmPower;
+                double Mass2 = Mass1;
                 //去速度
                 double Velocity1 = Power - 0.5 * Mass1;
                 //回速度
-                double Velocity2 = Power - 0.5 * Mass2;
+                double Velocity2 = 0;
                 //趟数
                 int toCarryCount = SumGoods / (ArmPower * Arm) + 1;
                 //去时间
                 double time1 = toCarryCount * (Distance / Velocity1);
                 //回时间
-                double time2 = toCarryCount * (Distance / Velocity2);
+                double time2 = 0;
+                //剩余货物数
+                int residurGoods = 20;
+                
+                for(int j = 0; j < toCarryCount; j++){
+                    if(residurGoods > ArmPower * Arm){
+                        Mass2 += ArmPower * Arm;
+                    }else{
+                        Mass2 += residurGoods;
+                    }
+                    Velocity2 = Power - 0.5 * Mass2;
+                    time2 += Distance / Velocity2;
+                    
+                    residurGoods -= Arm * ArmPower;
+                }
+                
+                
                 if (time1 + time2 < Battery * BatteryPower && Velocity2 > 0) {
                     time[i] = toCarryCount * PutUpGoodsTime + time1 + time2;
                 } else {
