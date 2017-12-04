@@ -1,66 +1,73 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 int main()
-{   
-  
-   int arm , engine , battery , numble , pedestal = 2 , pathlength = 10 ;                         //¶¨ÒåÒ»¸öÊı×é 0~9 ¶øÖ»ÓÃ1~9  ÆäËû1000-729µÄÊı Ä¬ÈÏÎªÁã£¬ 
-   double velocity_1 , velocity_2 ,  mass_1 , mass_2 , time_1 , time_2 , time[10][10][10] ={0};  //ÕâÑùÊı×éÏÂ±ê¾Í²»ÓÃ´Ó0¿ªÊ¼£¬ Êı×éÏÂ±ê¼´ÊÇarm ,engine, battery. 
-   for(arm = 1 ; arm <= 9 ; arm++ )
-    {
-		if(20%(arm * 2) == 0)
-		 numble = 20 / (arm * 2);
-		 else numble = 20 / (arm * 2) + 1;
-		for(engine = 1 ; engine <= 9 ; engine++ ) 
-			for( battery = 1 ; battery <= 9 ; battery++)
-			{ 
-			  cout<<"arm="<<arm<<"  "<<"engine="<<engine<<"  "<<"battery="<<battery<<"  ";
-			  mass_1 = pedestal + arm + engine + 0.5*battery  ;                                                       // »úÆ÷ÈËÈ¥ÄÃ»õµÄÂ·ÉÏµÄÖÊÁ¿ 
-			  mass_2 = pedestal + arm + engine + 0.5*battery  + 2*arm ;                                               //  »úÆ÷ÈË»ØÀ´µÄÂ·ÉÏµÄ×ÜÖÊÁ¿
-			  velocity_1 = 3*engine - 0.5*mass_1;                                                                    // »úÆ÷ÈËÈ¥ÄÃ»õµÄÂ·ÉÏµÄËÙ¶È 
-			  velocity_2 = 3*engine - 0.5*mass_2;                                                                   //»úÆ÷ÈËÔÚ»ØÀ´µÄÂ·ÉÏµÄËÙ¶È
-			if(velocity_1>0&&velocity_2>0){
-			  	 time_1 = numble * (pathlength/velocity_1 + 2) ;                                                   //»úÆ÷ÈËÔÚÈ¥ÄÃ»õÂ·ÉÏºÍÄÃ»õµÄÊ±¼ä 
-			  	 time_2 = numble * (pathlength/velocity_2);                                                       // »úÆ÷ÈË»ØÀ´µÄÂ·ÉÏµÄÊ±¼ä 
-			  	 if(3 * battery >= time_1+time_2){
-			  		time[arm][engine][battery] = time_1 + time_2;
-			  		 if(time[arm][engine][battery]>0){
-			  		 	cout<<"time="<<time[arm][engine][battery]<<endl;
-					   }
-			  			
-					  
-			  		
-			  	}
-			  	else
-			    	cout<<"\n";
-			    }
-			else 
-				 cout<<"\n";
-		
-			
-		    }
-     }
-  //½ÓÏÂÀ´ÓÃ´òÀŞ·¨½øĞĞ±È½Ï Ñ¡³ö×îĞ¡Öµ 
-    int  a , b , c;
-     for(arm = 1 ; arm <= 9 ; arm++ ) 
-       	for(engine = 1 ; engine <= 9 ; engine++ )
-       		for( battery = 1 ; battery <= 9 ; battery++)
-       			 if(time[arm][engine][battery]>0)
-					{                                                                                //´Ë¹ı³ÌÎªÑ¡È¡³öÒ»¸ö´óÓÚ0µÄtimeÓÃÓÚºóÃæµÄ±È½Ï 
-       			 	  a = arm ; b = engine  ; c =  battery  ;
-       			 	  
+{
+
+	int arm, engine, battery, numble, pedestal = 2, pathlength = 10;					   //å®šä¹‰ä¸€ä¸ªæ•°ç»„ 0~9 è€Œåªç”¨1~9  å…¶ä»–1000-729çš„æ•° é»˜è®¤ä¸ºé›¶ï¼Œ
+	double velocity_1, velocity_2, mass_1, mass_2, time_1, time_2, time[10][10][10] = {0}; //è¿™æ ·æ•°ç»„ä¸‹æ ‡å°±ä¸ç”¨ä»0å¼€å§‹ï¼Œ æ•°ç»„ä¸‹æ ‡å³æ˜¯arm ,engine, battery.
+	for (arm = 1; arm <= 9; arm++)
+	{
+		if (20 % (arm * 2) == 0)
+			numble = 20 / (arm * 2);
+		else
+			numble = 20 / (arm * 2) + 1;
+		for (engine = 1; engine <= 9; engine++)
+			for (battery = 1; battery <= 9; battery++)
+			{
+				cout << "arm=" << arm << "  "
+					 << "engine=" << engine << "  "
+					 << "battery=" << battery << "  ";
+				mass_1 = pedestal + arm + engine + 0.5 * battery;			// æœºå™¨äººå»æ‹¿è´§çš„è·¯ä¸Šçš„è´¨é‡
+				mass_2 = pedestal + arm + engine + 0.5 * battery + 2 * arm; // æœºå™¨äººå›æ¥çš„è·¯ä¸Šçš„æ€»è´¨é‡
+				velocity_1 = 3 * engine - 0.5 * mass_1;						// æœºå™¨äººå»æ‹¿è´§çš„è·¯ä¸Šçš„é€Ÿåº¦
+				velocity_2 = 3 * engine - 0.5 * mass_2;						// æœºå™¨äººåœ¨å›æ¥çš„è·¯ä¸Šçš„é€Ÿåº¦
+				if (velocity_1 > 0 && velocity_2 > 0)
+				{
+					time_1 = numble * (pathlength / velocity_1 + 2); // æœºå™¨äººåœ¨å»æ‹¿è´§è·¯ä¸Šå’Œæ‹¿è´§çš„æ—¶é—´
+					time_2 = numble * (pathlength / velocity_2);	 // æœºå™¨äººå›æ¥çš„è·¯ä¸Šçš„æ—¶é—´
+					if (3 * battery >= time_1 + time_2)
+					{
+						time[arm][engine][battery] = time_1 + time_2;
+						if (time[arm][engine][battery] > 0)
+						{
+							cout << "time=" << time[arm][engine][battery] << endl;
+						}
 					}
-					
-     for(arm = 1 ; arm <= 9 ; arm++ ) 
-       	for(engine = 1 ; engine <= 9 ; engine++ )
-       		for( battery = 1 ; battery <= 9 ; battery++)                                             
-			   if(time[arm][engine][battery]>0&&time[a][b][c]>time[arm][engine][battery])
-			   {                                                                                     //´Ë¹ı³ÌÎªÑ­»·É¸Ñ¡³ö×îĞ¡Öµ 
-			   	  	a = arm ; b = engine  ; c = battery  ;		   	  	 
-					  
-			   }  			 
-			   
-      cout<<"Best robot£º"<<"arm="<<a<<"  "<<"engine="<<b<<"  "<<"battery="<<c<<"  "<<"finished at time="<<time[a][b][c]<<endl; 
-     system("pause");
-    return 0;
- } 
+					else
+						cout << "\n";
+				}
+				else
+					cout << "\n";
+			}
+	}
+	//æ¥ä¸‹æ¥ç”¨æ‰“æ“‚æ³•è¿›è¡Œæ¯”è¾ƒ é€‰å‡ºæœ€å°å€¼
+	int a, b, c;
+	for (arm = 1; arm <= 9; arm++)
+		for (engine = 1; engine <= 9; engine++)
+			for (battery = 1; battery <= 9; battery++)
+				if (time[arm][engine][battery] > 0)
+				{ //æ­¤è¿‡ç¨‹ä¸ºé€‰å–å‡ºä¸€ä¸ªå¤§äº0çš„timeç”¨äºåé¢çš„æ¯”è¾ƒ
+					a = arm;
+					b = engine;
+					c = battery;
+				}
+
+	for (arm = 1; arm <= 9; arm++)
+		for (engine = 1; engine <= 9; engine++)
+			for (battery = 1; battery <= 9; battery++)
+				if (time[arm][engine][battery] > 0 && time[a][b][c] > time[arm][engine][battery])
+				{ //æ­¤è¿‡ç¨‹ä¸ºå¾ªç¯ç­›é€‰å‡ºæœ€å°å€¼
+					a = arm;
+					b = engine;
+					c = battery;
+				}
+
+	cout << "Best robotï¼š"
+		 << "arm=" << a << "  "
+		 << "engine=" << b << "  "
+		 << "battery=" << c << "  "
+		 << "finished at time=" << time[a][b][c] << endl;
+	system("pause");
+	return 0;
+}
