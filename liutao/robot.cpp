@@ -3,7 +3,6 @@ using namespace std;
 
 int main()
 {
-
 	int arm, engine, battery, numble, pedestal = 2, pathlength = 10;					   //定义一个数组 0~9 而只用1~9  其他1000-729的数 默认为零，
 	double velocity_1, velocity_2, mass_1, mass_2, time_1, time_2, time[10][10][10] = {0}; //这样数组下标就不用从0开始， 数组下标即是arm ,engine, battery.
 	for (arm = 1; arm <= 9; arm++)
@@ -15,6 +14,7 @@ int main()
 		for (engine = 1; engine <= 9; engine++)
 			for (battery = 1; battery <= 9; battery++)
 			{
+				if (!(arm == 5 && engine == 9 & battery == 2)) continue;
 				cout << "arm=" << arm << "  "
 					 << "engine=" << engine << "  "
 					 << "battery=" << battery << "  ";
@@ -26,6 +26,7 @@ int main()
 				{
 					time_1 = numble * (pathlength / velocity_1 + 2); // 机器人在去拿货路上和拿货的时间
 					time_2 = numble * (pathlength / velocity_2);	 // 机器人回来的路上的时间
+					cout << time_1 << "  " << time_2 << endl;
 					if (3 * battery >= time_1 + time_2)
 					{
 						time[arm][engine][battery] = time_1 + time_2;
